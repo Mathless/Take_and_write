@@ -7,7 +7,7 @@ from requests.exceptions import ConnectionError
 
 
 def get_relevant_campaigns():
-    """Возвращает актуальные компании в формате json
+    """Возвращает актуальные кампании в формате json
     Предполагаемая структура ответа:
     {
       "result": {
@@ -55,7 +55,7 @@ def get_relevant_campaigns():
             error_message["Описание ошибки"] = result.json()["error"]["error_detail"]
             error_message["RequestId"] = result.headers.get("RequestId", False)
         else:
-            # Возвращаем актуальные компании
+            # Возвращаем актуальные кампании
             return result.json()
 
     # Обработка ошибки, если не удалось соединиться с сервером API Директа
@@ -67,7 +67,7 @@ def get_relevant_campaigns():
     except:
         error_message = {"Error": "Произошла непредвиденная ошибка."}
 
-    # Если функция не вернула актуальные компании, то возвращаем сообщение об ошибке
+    # Если функция не вернула актуальные кампании, то возвращаем сообщение об ошибке
     return error_message
 
 
@@ -93,7 +93,7 @@ def insert_campaigns_to_db(campaigns_json):
             create_database_command = "CREATE TABLE relevant_campaigns (CampaingID int, Name varchar(255), UNIQUE(CampaingID, Name));"
             cursor.execute(create_database_command)
 
-        # Загружаем компании в таблицу
+        # Загружаем кампании в таблицу
         for campaign in campaigns_json["result"]["Campaigns"]:
             # Добавляем только уникальные строки
             insert_campaign_command = "INSERT OR IGNORE INTO relevant_campaigns (CampaingID, Name) VALUES (?, ?);"
@@ -116,7 +116,7 @@ def insert_campaigns_to_db(campaigns_json):
 if __name__ == "__main__":
     campaigns_json = get_relevant_campaigns()
     if "Error" not in campaigns_json.keys():
-        # Если актуальные компании удалось получить, то записываем их в базу данных.
+        # Если актуальные кампании удалось получить, то записываем их в базу данных.
         insert_campaigns_to_db(campaigns_json)
     else:
         # Если получена ошибка, то выводим её
