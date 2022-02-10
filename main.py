@@ -72,8 +72,7 @@ def get_relevant_campaigns():
 
 
 def insert_campaigns_to_db(campaigns_json):
-    # Местоположение нашей базы данных
-
+    # Местоположение базы данных
     db_path = './yandex_direct_sqlite3.db'
     # Статус подключения к базе данных
     sqlite_connection = False
