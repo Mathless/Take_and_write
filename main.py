@@ -22,7 +22,7 @@ def get_relevant_campaigns():
     #  Адрес сервиса Campaigns для отправки JSON-запросов (регистрозависимый)
     CampaignsURL = 'https://api.direct.yandex.com/json/v5/campaigns'
     # OAuth-токен пользователя, от имени которого будут выполняться запросы
-    token = 'AgAAAAAcmsdVAANksSnYBU3Vyka1njL7fNfx1f4'
+    token = 'TOKEN'
     # --- Подготовка, выполнение и обработка запроса ---
     #  Создание HTTP-заголовков запроса
     headers = {"Authorization": "Bearer " + token,  # OAuth-токен. Использование слова Bearer обязательно
